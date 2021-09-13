@@ -73,3 +73,7 @@ def main():
             outfile.write('Epoch {}: train_loss={}, train_acc={}, valid_loss={}, valid_acc={}\n'.format(
                 epoch+1, train_loss, train_acc, valid_loss, valid_acc))
     writer.close()
+
+
+if __name__ == '__main__':
+    main()
