@@ -12,7 +12,7 @@ def save_checkpoint(state, is_best, checkpoint_dir):
         os.mkdir(checkpoint_dir)
     torch.save(state, filename)
     if is_best:
-        shutil.copyfile(filename, os.path.join(checkpoint_dir, "model_best.ckpt")
+        shutil.copyfile(filename, os.path.join(checkpoint_dir, "model_best.ckpt"))
   
 
 def save_cm_fig(cm, classes, normalize, title, dir):
