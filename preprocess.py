@@ -16,7 +16,7 @@ from tqdm import tqdm
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir", default="Data/genres_original", type=str)
+    parser.add_argument("--input_dir", default="Data/genres_original", type=str)
     parser.add_argument("--output_dir", default="Data", type=str)
     parser.add_argument("--sr", default=22050, type=int)
 
@@ -65,14 +65,14 @@ def extract_features(audios, sr, MAP):
     return values
   
   
-def random_split(data_dir,class_names):
+def random_split(input_dir,class_names):
     training_audios = []
     validation_audios = []
     test_audios = []
 
     for _class in class_names:
-        class_dir = os.path.join(data_dir, _class)
-        wavs = glob.glob(f"{data_dir}/{_class}/*.wav")
+        class_dir = os.path.join(input_dir, _class)
+        wavs = glob.glob(f"{input_dir}/{_class}/*.wav")
         random.shuffle(wavs)
         # 8: 1: 1
         total = len(wavs)
@@ -95,7 +95,7 @@ def random_split(data_dir,class_names):
 
 def main():
     args = get_args()
-    class_names = os.listdir(args.data_dir)
+    class_names = os.listdir(args.input_dir)
 
     MAP = {}
     for i in range(len(class_names)):
@@ -103,11 +103,11 @@ def main():
     print(MAP)
     # {'disco': 0, 'pop': 1, 'rock': 2, 'jazz': 3, 'blues': 4, 'hiphop': 5, 'metal': 6, 'classical': 7, 'country': 8, 'reggae': 9}
 
-    if os.path.exists(f"{args.data_dir}/train.csv") and os.path.exists(f"{args.data_dir}/valid.csv") and\
-        os.path.exists(f"{args.data_dir}/test.csv"):
-        df = pd.read_csvf"{args.data_dir}/train.csv")
+    if os.path.exists(f"{args.input_dir}/train.csv") and os.path.exists(f"{args.input_dir}/valid.csv") and\
+        os.path.exists(f"{args.input_dir}/test.csv"):
+        df = pd.read_csvf"{args.input_dir}/train.csv")
         training_audios = df['path'].to_list()
-        df = pd.read_csv(f"{args.data_dir}/valid.csv")
+        df = pd.read_csv(f"{args.input_dir}/valid.csv")
         validation_audios = df['path'].to_list()
         df = pd.read_csv("test.csv")
         test_audios = df['path'].to_list()
