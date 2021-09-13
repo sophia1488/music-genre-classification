@@ -45,4 +45,4 @@ def validating(model, device, test_loader, loss_fn):
                   total_acc += torch.sum((pred_label == y).float()).item()
             total_cnt += target.size(0)
 
-    return train_loss / len(data_loader), total_acc / total_cnt
+    return train_loss / len(test_loader), total_acc / total_cnt
