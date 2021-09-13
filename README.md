@@ -41,6 +41,12 @@ You can see log file at ```result/[name]/log.log```, the model checkpoints can a
 cd genre-classification
 python3 eval.py --save_dir={the directory contains checkpoints}
 ```
+This will evaluate the model on testset.  
+
+A confusion matrix will be saved at ```save_dir```.
+
+<img src="https://user-images.githubusercontent.com/47291963/133106920-e12bfe15-f2c4-490b-a5ba-59b43baf1639.jpg" width="400">
+
 
 ## Use custom data (3 sec clip) to evaluate the model
 TODO
