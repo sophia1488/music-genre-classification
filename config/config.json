@@ -1,7 +1,7 @@
 {
 	"data_dir": "Data",
-	"dataaug": False,
-	"pretrained": True,
+	"dataaug": false,
+	"pretrained": true,
 	"model": "densenet",
 	"train_batch_size": 32,
   	"valid_batch_size": 16,
