@@ -32,7 +32,7 @@ Otherwise, it will split audios into train, valid, test set and store the paths 
 ## Train
 ```
 cd genre-classification
-python3 train.py --name={output_directory}
+python3 main.py --name={output_directory}
 ```
 You can see log file at ```result/[name]/log.log```, the model checkpoints can also be found in that directory.
 
