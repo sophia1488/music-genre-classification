@@ -1,0 +1,12 @@
+{
+	"data_dir": "Data",
+	"dataaug": False,
+	"pretrained": True,
+	"model": "densenet",
+	"train_batch_size": 32,
+  "valid_batch_size": 16,
+	"num_workers": 8,
+	"epochs": 70,
+	"lr": 1e-4,
+  "weight_decay": 1e-3
+}
