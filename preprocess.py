@@ -65,7 +65,7 @@ def extract_features(audios, sr, MAP):
     return values
   
   
-def random_split(input_dir,class_names):
+def random_split(input_dir, output_dir, class_names):
     training_audios = []
     validation_audios = []
     test_audios = []
@@ -82,13 +82,13 @@ def random_split(input_dir,class_names):
     
     # write to csv file
     df = pd.DataFrame(training_audios, columns=["path"])
-    df.to_csv('train.csv', index=False)
+    df.to_csv(f'{output_dir}/train.csv', index=False)
 
     df = pd.DataFrame(validation_audios, columns=["path"])
-    df.to_csv('valid.csv', index=False)
+    df.to_csv(f'{output_dir}/valid.csv', index=False)
 
     df = pd.DataFrame(test_audios, columns=["path"])
-    df.to_csv('test.csv', index=False)
+    df.to_csv(f'{output_dir}/test.csv', index=False)
 
     return training_audios, validation_audios, test_audios
   
@@ -103,16 +103,16 @@ def main():
     print(MAP)
     # {'disco': 0, 'pop': 1, 'rock': 2, 'jazz': 3, 'blues': 4, 'hiphop': 5, 'metal': 6, 'classical': 7, 'country': 8, 'reggae': 9}
 
-    if os.path.exists(f"{args.input_dir}/train.csv") and os.path.exists(f"{args.input_dir}/valid.csv") and\
-        os.path.exists(f"{args.input_dir}/test.csv"):
-        df = pd.read_csvf"{args.input_dir}/train.csv")
+    if os.path.exists(f"{args.output_dir}/train.csv") and os.path.exists(f"{args.output_dir}/valid.csv") and\
+        os.path.exists(f"{args.output_dir}/test.csv"):
+        df = pd.read_csv(f"{args.output_dir}/train.csv")
         training_audios = df['path'].to_list()
-        df = pd.read_csv(f"{args.input_dir}/valid.csv")
+        df = pd.read_csv(f"{args.output_dir}/valid.csv")
         validation_audios = df['path'].to_list()
         df = pd.read_csv("test.csv")
         test_audios = df['path'].to_list()
     else:
-        training_audios, validation_audios, test_audios = random_split()
+        training_audios, validation_audios, test_audios = random_split(args.input_dir, args.output_dir, class_names)
     
     # extract feature
     training_values = extract_features(training_audios, args.sr, MAP)
