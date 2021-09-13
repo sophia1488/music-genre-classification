@@ -9,7 +9,6 @@ class AudioDataset(Dataset):
         self.transforms = transforms
         with open(pkl_dir, "rb") as f:
             self.data = pickle.load(f)
-            
     def __len__(self):
         return len(self.data)
     

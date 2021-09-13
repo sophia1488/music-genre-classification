@@ -12,12 +12,14 @@ from joblib import dump
 import librosa
 import pandas as pd
 from tqdm import tqdm
+import warnings
+warnings.filterwarnings('ignore')
 
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_dir", default="Data/genres_original", type=str)
-    parser.add_argument("--output_dir", default="Data", type=str)
+    parser.add_argument("--input_dir", default="../Data/genres_original", type=str)
+    parser.add_argument("--output_dir", default="../Data", type=str)
     parser.add_argument("--sr", default=22050, type=int)
 
     args = parser.parse_args()
@@ -112,6 +114,10 @@ def main():
         df = pd.read_csv("test.csv")
         test_audios = df['path'].to_list()
     else:
+<<<<<<< HEAD
+        print('creating 8:1:1 split and save to csv')
+=======
+>>>>>>> 6dcf3e3d3eab94b445c690dd48016e0ff068463c
         training_audios, validation_audios, test_audios = random_split(args.input_dir, args.output_dir, class_names)
     
     # extract feature

@@ -10,9 +10,9 @@ import numpy as np
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str)
     parser.add_argument('--cuda', default=0, type=int, help='Specify cuda number')
-    parser.add_argument("--dir", type=str, required=True)
+    parser.add_argument("--save_dir", type=str, required=True)
+    parser.add_argument("--data_dir", default="../Data", type=str)
     args = parser.parse_args()
     return args
 
@@ -30,12 +30,12 @@ def Eval(model, device, test_loader):
             outputs = model(inputs)
 
             _, pred_label = torch.max(outputs.data, 1)
-            total_acc += torch.sum((pred_label == y).float()).item()
+            total_acc += torch.sum((pred_label == target).float()).item()
             total_cnt += target.size(0)
 
             target = target.cpu()
             pred_label = pred_label.cpu()
-            cm = confusion_matrix(target, pred_label, labels=[i for i in range(num_of_class)])
+            cm = confusion_matrix(target, pred_label, labels=[i for i in range(10)])
             CM = np.add(CM, cm)
         
     return total_acc / total_cnt, CM
@@ -48,22 +48,23 @@ def main():
     print(f"device: {device}")
 
     print('Creating dataloader...')
-    Testset = AudioDataset(f"{config.data_dir}/test_128mel.pkl")
+    Testset = AudioDataset(f"{args.data_dir}/test_128mel.pkl")
     test_loader = DataLoader(Testset, batch_size=16)
 
     
     print('Loading model...')
     model = DenseNet()
-    checkpoint = torch.load(f"{args.dir}/model_best.ckpt", map_location='cpu')
+    checkpoint = torch.load(f"{args.save_dir}/model_best.ckpt", map_location='cpu')
     model.load_state_dict(checkpoint['state_dict']) # already is ['state_dict']
     model = model.to(device)
     model.eval()
     
     # Predicted result
     print('Predicting...')
-    test_acc, conf_mat = Eval(model, device, test_loader)
+    test_acc, cm = Eval(model, device, test_loader)
+    print('test acc:', test_acc)
     target_names=['rock', 'country', 'disco', 'blues', 'metal', 'hiphop', 'pop', 'jazz', 'classical', 'reggae']
-    save_cm_fig(cm, classes=target_names, normalize=True, title="genre_classification", args.dir)
+    save_cm_fig(cm, classes=target_names, normalize=True, title="genre_classification", save_dir=args.save_dir)
 
 if __name__ == '__main__':
     main()

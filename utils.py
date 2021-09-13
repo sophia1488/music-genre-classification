@@ -2,7 +2,8 @@ import os
 import matplotlib.pyplot as plt
 import itertools
 import shutil
-impot torch
+import torch
+import numpy as np
 
 
 def save_checkpoint(state, is_best, checkpoint_dir):
@@ -15,12 +16,12 @@ def save_checkpoint(state, is_best, checkpoint_dir):
         shutil.copyfile(filename, os.path.join(checkpoint_dir, "model_best.ckpt"))
   
 
-def save_cm_fig(cm, classes, normalize, title, dir):
+def save_cm_fig(cm, classes, normalize, title, save_dir):
     if normalize:
         cm = cm.astype('float')*100/cm.sum(axis=1)[:,None]
    
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title(title)
+    plt.title(title, fontsize=16)
 #    plt.colorbar()
     tick_marks = np.arange(len(classes))
     plt.xticks([])
@@ -34,9 +35,9 @@ def save_cm_fig(cm, classes, normalize, title, dir):
         plt.text(j, i, format(cm[i,j],fmt), fontsize=9,
                 horizontalalignment='center',
                 color='white' if cm[i,j] > threshold else 'black')
-    plt.xlabel('predicted', fontsize=18)
-    plt.ylabel('true', fontsize=18)
+    plt.xlabel('predicted', fontsize=14)
+    plt.ylabel('true', fontsize=14)
     plt.tight_layout()
     
-    plt.savefig(f'{dir}/cm_{title}.jpg')
+    plt.savefig(f'{save_dir}/cm_{title}.jpg')
     return

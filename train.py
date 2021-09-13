@@ -22,8 +22,8 @@ def training(model, device, data_loader, optimizer, loss_fn):
         optimizer.step()
         train_loss += loss.item()
         
-         _, pred_label = torch.max(y_hat, dim=1)
-        acc = torch.sum((pred_label == y).float()).item()
+        _, pred_label = torch.max(outputs, dim=1)
+        acc = torch.sum((pred_label == target).float()).item()
         total_acc += acc
         total_cnt += target.size(0) 
         
@@ -38,11 +38,11 @@ def validating(model, device, test_loader, loss_fn):
             target = data[1].squeeze(1).to(device)
 
             outputs = model(inputs)
-                  loss = loss_fn(outputs, target)
-                  train_loss += loss.item()
+            loss = loss_fn(outputs, target)
+            train_loss += loss.item()
 
             _, pred_label = torch.max(outputs.data, 1)
-                  total_acc += torch.sum((pred_label == y).float()).item()
+            total_acc += torch.sum((pred_label == target).float()).item()
             total_cnt += target.size(0)
 
     return train_loss / len(test_loader), total_acc / total_cnt
