@@ -51,7 +51,8 @@ def extract_spectrogram(sr, values, clip, target):
     new_entry["values"] = np.array(specs)
     new_entry["target"] = target
     values.append(new_entry)
-    
+    return [new_entry]
+
     
 def extract_features(audios, sr, MAP):
     values = []

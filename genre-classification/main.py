@@ -25,7 +25,7 @@ def get_args():
 
     # parameter #
     parser.add_argument("--cuda", default=0, type=int, help='Specify cuda number')
-    parser.add_argument("--epochs", default=50, type=int)
+    parser.add_argument("--epochs", default=20, type=int)
     parser.add_argument("--train_batch", default=8, type=int)
     parser.add_argument("--valid_batch", default=8, type=int)
     parser.add_argument("--num_workers", default=8, type=int)
