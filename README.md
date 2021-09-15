@@ -51,14 +51,18 @@ A confusion matrix will be saved at ```save_dir```.
 
 
 ## Use custom data (any .wav files) to evaluate the model
+I have provided my checkpoint [here](https://drive.google.com/file/d/1C2P0y3qukEWHSPW73j9ARbT59HxYjQvb/view?usp=sharing), feel free to use it!
 ```
 cd genre-classification
 # --save_dir: only the directory, e.g. result/0913, do not provide with your checkpoint path
 python3 custom_test.py --save_dir={the directory contains checkpoints} --audio={your audio file}
 ```
 
-### My observations with some random Youtube songs:**
+### My observations with some random Youtube songs:
 For classical music, Chopin Waltz and Greig - Morning from Peer Grynt, the model can successfully classify both of them as "classical" genre.  As a classical music lover, I also find it easier to separate classical music from the rest of them lol.
+
 For jazz, I've tried 2 songs, one with vocal (What a wonderful world), another just pure instrument.  The model cannot classify the vocal one correctly, yet it does classify the pure instrument song as jazz.  My guess is that jazz songs in GTZAN dataset are mostly (I didn't listen to all of them) instrumental, so the model may be confused when there's a human singing.
+
 I've also tried 2 songs for reggae and blues genre respectively, the model cannot predict correctly.
+
 So, even though the model perform decently well on GTZAN valid & test set, the model may not correctly classify all of them since the dataset is not so diverse.
