@@ -50,6 +50,10 @@ A confusion matrix will be saved at ```save_dir```.
 <img src="https://user-images.githubusercontent.com/47291963/133106920-e12bfe15-f2c4-490b-a5ba-59b43baf1639.jpg" width="400">
 
 I've been asked an interesting question: "what if the input spectrogram is flipped"?
+```
+# ./genre_classification/preprocess.py, line 46, add this to flip the tensor in time-domain
+spec = np.flip(spec, 1)
+```
 
 So, here's the result.  The test accuracy drops from 1.0 to 0.8.  The performance drop is significant in terms of rock, blues, hip-hop songs.
 
