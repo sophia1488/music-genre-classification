@@ -52,6 +52,7 @@ A confusion matrix will be saved at ```save_dir```.
 I've been asked an interesting question: "what if the input spectrogram is flipped"?
 
 So, here's the result.  The test accuracy drops from 1.0 to 0.8.  The performance drop is significant in terms of rock, blues, hip-hop songs.
+
 <img src="https://user-images.githubusercontent.com/47291963/133642080-248e1417-403b-45f3-a1b7-d80b1666ab31.jpg" width="400">
 
 
