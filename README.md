@@ -49,6 +49,11 @@ A confusion matrix will be saved at ```save_dir```.
 
 <img src="https://user-images.githubusercontent.com/47291963/133106920-e12bfe15-f2c4-490b-a5ba-59b43baf1639.jpg" width="400">
 
+I've been asked an interesting question: "what if the input spectrogram is flipped"?
+
+So, here's the result.  The test accuracy drops from 1.0 to 0.8.  The performance drop is significant in terms of rock, blues, hip-hop songs.
+<img src="https://user-images.githubusercontent.com/47291963/133642080-248e1417-403b-45f3-a1b7-d80b1666ab31.jpg" width="400">
+
 
 ## Use custom data (any .wav files) to evaluate the model
 I have provided my checkpoint [here](https://drive.google.com/file/d/1C2P0y3qukEWHSPW73j9ARbT59HxYjQvb/view?usp=sharing), feel free to use it!
