@@ -1,8 +1,8 @@
 from matplotlib import pyplot as plt
 import librosa
 import numpy as np
-import torchaudio
 import torch
+import torchaudio
 
 
 def extract_spectrogram(sr, clip):
