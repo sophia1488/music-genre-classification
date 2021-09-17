@@ -29,6 +29,8 @@ If yes, extract features and save to ```[output_dir]/train_128mel.pkl```
 
 Otherwise, it will split audios into train, valid, test set and store the paths in ```[output_dir]/*.csv```.
 
+![下載](https://user-images.githubusercontent.com/47291963/133715428-b72fbe63-9278-4ed7-b833-e9832ddf14f7.png)
+
 ## Train
 ```
 cd genre-classification
